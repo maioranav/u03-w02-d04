@@ -17,7 +17,7 @@ export const Favourites = (props) => {
       <Row>
         <Col xs={10} className="mx-auto mb-5">
           {favjobs?.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+            <Job key={`fav-${jobData._id}`} data={jobData} />
           ))}
         </Col>
       </Row>
