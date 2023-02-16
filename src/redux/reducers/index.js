@@ -12,7 +12,7 @@ const mainReducer = (state = initialState, action) => {
       case "ADDFAV":
          return { ...state, favs: [...state.favs, action.payload] };
       case "DELETEFAV":
-         return { ...state, favs: state.favs.filter((_, i) => i !== action.payload) };
+         return { ...state, favs: state.favs.filter((element) => element._id !== action.payload) };
       default:
          return state;
    }
