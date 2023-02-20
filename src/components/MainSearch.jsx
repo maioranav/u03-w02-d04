@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Job from "./Job";
 import { useSelector, useDispatch } from "react-redux";
-import { getJobsAction } from "../redux/actions";
+import { getJobsAction, clearJobsList } from "../redux/actions";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
@@ -20,6 +20,10 @@ const MainSearch = () => {
     dispatch(getJobsAction(query));
     //QUI C'ERA IL FETCH COL SETJOBS!
   };
+
+  useEffect(() => {
+    dispatch(clearJobsList());
+  }, []);
 
   return (
     <Container>

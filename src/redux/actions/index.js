@@ -29,6 +29,15 @@ export const getJobsAction = (query, type = "search") => {
    }
 }
 
+export const clearJobsList = () => {
+   return async (dispatch, getState) => {
+      dispatch({
+         type: GET_JOBS,
+         payload: ""
+      });
+   }
+}
+
 export const removeFavJob = (id) => {
    return async (dispatch, getState) => {
       dispatch({ type: DELETEFAV, payload: id })
