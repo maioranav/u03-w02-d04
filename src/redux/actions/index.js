@@ -3,13 +3,13 @@ export const DELETEFAV = "DELETEFAV";
 export const GET_JOBS = "GET_JOBS";
 export const GET_JOBS_ERROR = "GET_JOBS_ERROR";
 
-export const getJobsAction = (query) => {
+export const getJobsAction = (query, type = "search") => {
 
-   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?";
 
    return async (dispatch, getState) => {
       try {
-         const response = await fetch(baseEndpoint + query + "&limit=20");
+         const response = await fetch(baseEndpoint + type + "=" + query + "&limit=20");
          if (response.ok) {
             const { data } = await response.json();
             dispatch({
