@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { BsEraserFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
+import { removeFavJob, addFavJob } from "../redux/actions";
 
 const Job = ({ data }) => {
   const location = useLocation();
@@ -22,13 +23,13 @@ const Job = ({ data }) => {
         {location.pathname === "/favourites" ? (
           <BsEraserFill
             onClick={() => {
-              dispatch({ type: "DELETEFAV", payload: data._id });
+              dispatch(removeFavJob(data._id));
             }}
           />
         ) : (
           <FaHeart
             onClick={() => {
-              dispatch({ type: "ADDFAV", payload: data });
+              dispatch(addFavJob(data));
             }}
           />
         )}

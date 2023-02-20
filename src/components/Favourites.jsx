@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const Favourites = (props) => {
-  const favjobs = useSelector((state) => state.favs);
+  const favjobs = useSelector((state) => state.favs.favs);
 
   return (
     <Container>
