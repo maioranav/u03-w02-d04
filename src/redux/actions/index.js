@@ -1,7 +1,9 @@
 export const ADDFAV = "ADDFAV";
 export const DELETEFAV = "DELETEFAV";
 export const GET_JOBS = "GET_JOBS";
-export const GET_JOBS_ERROR = "GET_JOBS_ERROR";
+export const JOBS_ERROR = "JOBS_ERROR";
+export const JOBS_LOADING = "JOBS_LOADING";
+export const JOBS_LOADED = "JOBS_LOADED";
 
 export const getJobsAction = (query, type = "search") => {
 
@@ -9,6 +11,9 @@ export const getJobsAction = (query, type = "search") => {
 
    return async (dispatch, getState) => {
       try {
+         dispatch({
+            type: JOBS_LOADING,
+         });
          const response = await fetch(baseEndpoint + type + "=" + query + "&limit=20");
          if (response.ok) {
             const { data } = await response.json();
@@ -16,15 +21,20 @@ export const getJobsAction = (query, type = "search") => {
                type: GET_JOBS,
                payload: data
             });
+            setTimeout(() => { dispatch({ type: JOBS_LOADED }) }, 1000)
          } else {
             dispatch({
-               type: GET_JOBS_ERROR
+               type: JOBS_ERROR,
+               payload: "Error while fetching"
             });
+            setTimeout(() => { dispatch({ type: JOBS_LOADED }) }, 1000)
          }
       } catch (error) {
          dispatch({
-            type: GET_JOBS_ERROR
+            type: JOBS_ERROR,
+            payload: `${error}`
          });
+         setTimeout(() => { dispatch({ type: JOBS_LOADED }) }, 1000)
       }
    }
 }
@@ -35,6 +45,7 @@ export const clearJobsList = () => {
          type: GET_JOBS,
          payload: ""
       });
+      setTimeout(() => { dispatch({ type: JOBS_LOADED }) }, 1000)
    }
 }
 
